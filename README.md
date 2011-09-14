@@ -40,18 +40,11 @@ class OrdersController < ApplicationController
     redirect_to request.url
   end
 
-end
-
-# app/controllers/payments_controller.rb
-class PaymentsController < ApplicationController
-
-  # POST /payments/1/confirm
+  # POST /orders/1/confirm
   def confirm
     # params #=> amount: 7300, userid: 107, paymentid: 8831914, orderid: 8964, key: "d27f27b54c5c9b944685a111483e68b5"
     response = MoneyOnline::Response.new(params)
-    if response.valid? && (Order.find(response.order_id).amount == response.amount)
-      payment.confirm!
-    end
+    order.confirm! if response.valid?
     render :xml => response
   end
 
