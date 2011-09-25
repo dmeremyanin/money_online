@@ -27,10 +27,7 @@ module MoneyOnline
     end
 
     def params_valid?
-      [:amount, :user_id, :system_id, :order_id, :currency].inject(true) do |memo, attribute|
-        memo = false unless params[attribute]
-        memo
-      end
+      not [:amount, :user_id, :system_id, :order_id, :currency].any? { |attribute| params[attribute].blank? }
     end
 
   end
