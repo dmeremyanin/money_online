@@ -31,7 +31,7 @@ module MoneyOnline
     end
 
     def generate_signature_string
-      [amount, user_id, money_payment_id, MoneyOnline.config.secret].join
+      [ params[:amount], user_id, money_payment_id, MoneyOnline.config.secret ].join
     end
 
     def generate_signature
